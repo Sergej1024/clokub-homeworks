@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: netolog-142-module
+spec:
+  containers:
+    - name: netology-142-module
+      image: sergej1024/fedora-hvac:latest

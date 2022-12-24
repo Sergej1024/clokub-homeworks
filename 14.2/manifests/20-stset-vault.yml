@@ -1,0 +1,41 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels: 
+    app: vault
+  name: vault
+spec:
+  selector:
+    matchLabels:
+      app: vault
+  serviceName: vault
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: vault
+    spec:
+      containers:
+        - name: vault
+          image: vault:1.11.2
+          args: ["server"]
+          securityContext:
+            capabilities:
+              add: ["IPC_LOCK"]
+          ports: 
+            - name: vault
+              containerPort: 8200
+              protocol: TCP
+          env:
+            - name: VAULT_LOCAL_CONFIG
+              value: '{"listener":{"tcp":{"address":"0.0.0.0:8200","tls_disable":1}},"storage":{"file":{"path":"/vault/secrets"}},"ui":true, "log_level": "debug"}'
+          volumeMounts:
+            - mountPath: /vault/secrets
+              name: vault-secrets
+      volumes:
+        - name: vault-secrets
+          persistentVolumeClaim:
+            claimName: vault
+
+

@@ -1,9 +1,7 @@
 FROM fedora:latest
-RUN dnf -y install pip jq \
-    && dnf clean all \
+RUN dnf install -y python3-pip jq \
+  	&& dnf clean all \
   	&& rm -rf /var/cache/yum \
-    && pip install -q hvac
-COPY secrets.py /opt/secret-hvac.py
-RUN chmod +x /opt/secret-hvac.py
-EXPOSE 8200
-CMD ["python3", "/opt/secret-hvac.py"]
+    && pip3 install hvac==0.11.2
+COPY module.py /opt/module.py
+CMD ["sleep", "1000000"]

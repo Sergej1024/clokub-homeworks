@@ -1,0 +1,40 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels: 
+    app: vault
+  name: vault
+spec:
+  selector:
+    matchLabels:
+      app: vault
+  serviceName: vault
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: vault
+    spec:
+      containers:
+        - name: vault
+          image: vault:1.11.2
+          args: ["server"]
+          securityContext:
+            capabilities:
+              add: ["IPC_LOCK"]
+          ports: 
+            - name: vault
+              containerPort: 8200
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: vault-addr
+          volumeMounts:
+            - name: vault-config
+              mountPath: /vault/config
+              readOnly: true
+      volumes:
+        - name: vault-config
+          configMap:
+            name: vault-config

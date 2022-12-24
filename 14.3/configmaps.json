@@ -1,0 +1,54 @@
+{
+    "apiVersion": "v1",
+    "items": [
+        {
+            "apiVersion": "v1",
+            "data": {
+                "name": "netology.ru"
+            },
+            "kind": "ConfigMap",
+            "metadata": {
+                "creationTimestamp": "2022-12-24T15:02:29Z",
+                "name": "domain",
+                "namespace": "default",
+                "resourceVersion": "393",
+                "uid": "e18f0394-9c5d-44c4-87c5-46bca55dd7dc"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "data": {
+                "ca.crt": "-----BEGIN CERTIFICATE-----\nMIIDBjCCAe6gAwIBAgIBATANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDEwptaW5p\na3ViZUNBMB4XDTIyMTAxODE0MzAzM1oXDTMyMTAxNjE0MzAzM1owFTETMBEGA1UE\nAxMKbWluaWt1YmVDQTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBANX+\nIWbm9iImgJWPaf+1ybwwe8AzvZic66obqw4enDAFMScr1IXDX0S8ktb+yXjz/d0J\nyKglm9lN0Cx/DeR4Iu9H0GZoOaDmcrI8uCjIFZ+Gnz0p8CPdjOTuIG4jUeOmW8to\nkDbWK1rkDkaPjpoXuCxIoNEsbz63wSFrqcznSFMFCC5Lh3UchKIYCdhW2ov6CyDj\nu02msT32CCtYrZSj32UeQTkhfepayCazKJE6aLAki4vGCvHDFtzmj4NZ+zSdJ2Id\nuhHi6+fFQr6RB+YWCMxZi7X+quAp+yPZchTJOvPWO1iREfEEeDqyPguPIlv+diOg\nVcZYwo7FfdLQ7bV36b8CAwEAAaNhMF8wDgYDVR0PAQH/BAQDAgKkMB0GA1UdJQQW\nMBQGCCsGAQUFBwMCBggrBgEFBQcDATAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQW\nBBSxO6mEy+LCmTmuEZ2Okc4ezFldSTANBgkqhkiG9w0BAQsFAAOCAQEAbAF9flXk\n8Iun3fHf9wojgKNjb+OKpA0eUT/gPGIGYA1d2sg4vpNc1fcsHU69vVrg/wAHR9hp\nAsm+V2eDkgHElobW/NoJHzhm/cc8UvpjJ7mgov1CfVQL8U4FSm41neNITScMdm7O\nVNn/cHYrHkQFzF/TfOE7VxXbp10RkWbmfAN0O55QL6bDM06zY6o8Nr1NwVYnH8/0\ns6grDD6acHxlpebVLZd+BM0gDhpAfMzwbkd5IiBrey8VDG+UnQsQzfpQ80DgMfzp\n3gD9dqWvv/78C8WoyZr51M0NFJrU3n7SqNYlGgRyZ6uu0C/bwejGAAelSy1+AvdE\n2vHwHATHM9NRDw==\n-----END CERTIFICATE-----\n"
+            },
+            "kind": "ConfigMap",
+            "metadata": {
+                "annotations": {
+                    "kubernetes.io/description": "Contains a CA bundle that can be used to verify the kube-apiserver when using internal endpoints such as the internal service IP or kubernetes.default.svc. No other usage is guaranteed across distributions of Kubernetes clusters."
+                },
+                "creationTimestamp": "2022-12-24T15:02:08Z",
+                "name": "kube-root-ca.crt",
+                "namespace": "default",
+                "resourceVersion": "335",
+                "uid": "6e4a4bf0-0132-4b01-8fa3-bdfc3643a196"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "data": {
+                "nginx.conf": "server {\n    listen 80;\n    server_name  netology.ru www.netology.ru;\n    access_log  /var/log/nginx/domains/netology.ru-access.log  main;\n    error_log   /var/log/nginx/domains/netology.ru-error.log info;\n    location / {\n        include proxy_params;\n        proxy_pass http://10.10.10.10:8080/;\n    }\n}\n"
+            },
+            "kind": "ConfigMap",
+            "metadata": {
+                "creationTimestamp": "2022-12-24T15:02:19Z",
+                "name": "nginx-config",
+                "namespace": "default",
+                "resourceVersion": "385",
+                "uid": "ba3c8388-e7fe-4569-b8f2-1289b6eec33f"
+            }
+        }
+    ],
+    "kind": "List",
+    "metadata": {
+        "resourceVersion": ""
+    }
+}

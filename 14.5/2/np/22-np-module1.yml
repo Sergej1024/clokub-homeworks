@@ -1,0 +1,29 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: netology-14-5-module1
+spec:
+  podSelector:
+    matchLabels:
+      role: module1
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          role: module2
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          role: module2
+  - to:
+    - ipBlock:
+        cidr: 0.0.0.0/0
+        except:
+        - 10.0.0.0/8
+        #- 192.168.0.0/16
+        - 172.16.0.0/20

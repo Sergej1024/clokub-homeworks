@@ -1,0 +1,21 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: module2
+  labels:
+    project: myproject
+    role: module2
+spec:
+  containers:
+    - name: module2
+      image: postgres:14.5-alpine
+      env:
+        - name: PGPORT
+          value: "6379"
+        - name: POSTGRES_PASSWORD
+          value: "netology-14-5"
+        - name: POSTGRES_USER
+          value: "user"
+        - name: POSTGRES_DB
+          value: "netology-14-5"

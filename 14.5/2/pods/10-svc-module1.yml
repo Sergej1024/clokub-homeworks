@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: module1
+  labels:
+    role: module1
+    project: myproject
+spec:
+  ports:
+  - name: module1
+    port: 5978
+  selector:
+    role: module1
+    project: myproject

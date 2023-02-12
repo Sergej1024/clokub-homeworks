@@ -1,0 +1,47 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: pma
+  name: pma
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pma
+  # strategy:
+  #   type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: pma
+    spec:
+      containers:
+      - image: phpmyadmin
+        name: phpmyadmin
+        ports:
+        - containerPort: 80
+        env:
+        - name: PMA_USER
+          value: "netology"
+        - name: PMA_PASSWORD 
+          value: "servicemode"
+        - name: PMA_HOST
+          value: "rc1a-0u4n6o59hah1hme2.mdb.yandexcloud.net"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pma-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: pma
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
